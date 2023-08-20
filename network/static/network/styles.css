@@ -1,0 +1,84 @@
+/* .body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+} */
+
+.user-post {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  padding:3rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid lightgrey;
+}
+
+.user-post form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.user-post textarea {
+  width: 500px;
+  min-height: 100px;
+  text-align: center;
+}
+
+.user-post button {
+  height:60px;
+  width:60px;
+  border-radius: 300px;
+  margin:1rem;
+}
+
+.posts {
+  display: flex;
+  flex-direction: column;
+  justify-content:left;
+  align-items: center;
+}
+
+.post {
+  display:flex;
+  justify-content: left;
+  align-items: center;
+  min-width :600px;
+  max-width: 600px;
+  min-height: 100px;
+  border: 1px solid lightgrey;
+  background-color: beige;
+  margin: 1rem;
+  padding: 1rem;
+}
+
+.post img {
+  margin:1rem;
+  border-radius: 50px;
+  margin-right:2rem;
+}
+
+.post-content {
+  display:flex ;
+  flex-direction: column;
+  justify-content: center;
+  align-items: left;
+}
+
+.like_button {
+  max-width: 70px;
+}
+
+#profile-page {
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.side-by-side {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

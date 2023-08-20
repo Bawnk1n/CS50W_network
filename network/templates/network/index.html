@@ -1,0 +1,47 @@
+{% extends "network/layout.html" %}
+{% load static %}
+
+{% block body %}
+    {% if user.is_authenticated %}
+    <div class="user-post">
+        <form href="{% url 'index' %}" method='post'>
+            {% csrf_token %}
+            <textarea placeholder="It's not as smart as you think it is, but it's smarter than we expected" name="post_content"></textarea>
+            <button type="submit" class="btn btn-success">Post</button>
+        </form>
+    </div>
+    {% else %}
+        <h4><a href="{% url 'login' %}">Log in</a></h4>
+    {% endif %}
+
+    <div class="posts">
+        {% for post in posts %}
+        <div class="post" data-index="{{post.index}}">
+            <div class="post-profile">
+                <img src="{% static 'images/profile-placeholder.jpg' %}" width="50px" height="50px" alt="profile-pic"/>
+            </div>
+            <div class="post-content">
+                <h5><a href="{% url 'profile-page'  post.post.user.id %}" >{{ post.post.user }}</a></h5>
+                <div id="post_content_div_{{post.post.id}}">
+                    <p id="post_content_{{post.post.id}}">{{ post.post.content }}</p>
+                </div>
+                <p><small>{{ post.post.timestamp }}</small></p>
+                <p id="like_count_{{post.post.id}}">{{ post.post.likes.all.count }} likes</p>     
+                <p>{{post.post.index}}</p>    
+                <div class="side-by-side">    
+                    <button id="like_button_{{post.post.id}}" name="post_id" value="{{post.post.id}}" class="like_button btn {% if not post.post.id in user_likes %}btn-success{% else %}btn-danger{% endif %}" data-liked="{% if post.post.id in user_likes %}true{% else %}false{% endif %}" onclick="toggleLike({{post.post.id}})">{% if not post.post.id in user_likes %}Like{% else %}Unlike{% endif %}</button>  
+                    {% if post.post.user == request.user %}
+                        <button id="edit-btn" class="btn btn-info" data-id="{{post.post.id}}">Edit</button>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        <div class="side-by-side">
+            <button id="back-btn" class="btn btn-primary">Back</button>
+            <button id="next-btn" class="btn btn-primary">Next</button>
+        </div>
+    </div>
+
+
+{% endblock %}

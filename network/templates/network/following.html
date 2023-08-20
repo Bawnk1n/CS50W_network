@@ -1,0 +1,31 @@
+{% extends 'network/layout.html' %}
+{% load static %}
+
+{% block body %}
+<h2>Following</h2>
+
+<div class="posts">
+  {% for post in posts %}
+  <div class="post" data-index="{{post.index}}">
+      <div class="post-profile">
+          <img src="{% static 'images/profile-placeholder.jpg' %}" width="50px" height="50px" alt="profile-pic"/>
+      </div>
+      <div class="post-content">
+          <h5><a href="{% url 'profile-page'  post.post.user.id %}" >{{ post.post.user }}</a></h5>
+          <p>{{ post.post.content }}</p>
+          <p><small>{{ post.post.timestamp }}</small></p>
+          <p id="like_count_{{post.post.id}}">{{ post.post.likes.all.count }} likes</p>             
+          <button id="like_button_{{post.post.id}}" name="post_id" value="{{post.post.id}}" class="like_button btn {% if not post.post.id in user_likes %}btn-success{% else %}btn-danger{% endif %}" data-liked="{% if post.post.id in user_likes %}true{% else %}false{% endif %}" onclick="toggleLike({{post.post.id}})">{% if not post.post.id in user_likes %}Like{% else %}Unlike{% endif %}</button>     
+      </div>
+  </div>
+  {% endfor %}
+  {% csrf_token %} 
+  <div class="side-by-side">
+    <button id="back-btn" class="btn btn-primary">Back</button>
+    <button id="next-btn" class="btn btn-primary">Next</button>
+  </div>
+</div>
+
+
+
+{% endblock %}
